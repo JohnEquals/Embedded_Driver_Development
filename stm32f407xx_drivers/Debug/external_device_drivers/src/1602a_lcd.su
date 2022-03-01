@@ -1,0 +1,11 @@
+1602a_lcd.c:27:13:delay	24	static
+1602a_lcd.c:36:13:pulseEnablePin	16	static
+1602a_lcd.c:50:6:lcd_clear_display	24	static
+1602a_lcd.c:66:6:lcd_return_home	24	static
+1602a_lcd.c:81:6:lcd_function_set	24	static
+1602a_lcd.c:100:6:lcd_write_string_to_lcd	64	static
+1602a_lcd.c:110:6:lcd_display_status_set	24	static
+1602a_lcd.c:136:6:lcd_write_character_to_lcd	160	static
+1602a_lcd.c:190:9:lcd_check_busy_flag	32	static
+1602a_lcd.c:199:6:lcd_set_ddram_address	40	static
+1602a_lcd.c:215:6:write_ddram_address_to_pins	24	static

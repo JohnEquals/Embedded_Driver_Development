@@ -15,7 +15,7 @@ void delay(void)
 int main(void)
 {
 	uint8_t ledIndex = 0;
-	GPIO_Handle_t GpioLed[4]
+	GPIO_Handle_t GpioLed[4];
 	// PD12, green led
 	GpioLed[0].pGPIOx = GPIOD;
 	GpioLed[0].GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_12;

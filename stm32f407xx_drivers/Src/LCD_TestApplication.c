@@ -3,69 +3,66 @@
  */
 
 #include "stm32f407xx.h"
+#include "1602a_lcd.h"
+#include "dht11.h"
 #include <stdint.h>
+#include <stdio.h>
 
-#define MODE_8BIT 	8
-#define MODE_4BIT 	4
+
 #define HIGH		1
 #define LOW			0
 
+
 // time is in milliseconds
-void delay( uint32_t time){
-	for( uint8_t i = 0; i < (time*2000); i++);
+void delay( uint32_t time)
+{
+	for( uint32_t i = 0; i < (time*1000); i++);
 }
 
-void pulseEnablePin( GPIO_Handle_t *E ){
-	GPIO_WriteToOutputPin(E -> pGPIOx, E -> GPIO_PinConfig.GPIO_PinNumber, HIGH);
-	delay(2);
-	GPIO_WriteToOutputPin(E ->pGPIOx, E -> GPIO_PinConfig.GPIO_PinNumber, LOW);
-}
+extern void initialise_monitor_handles(void);
 
-void LCD_init( GPIO_Handle_t *RS, GPIO_Handle_t *RW, GPIO_Handle_t *E, GPIO_Handle_t *DB0, GPIO_Handle_t *DB1, GPIO_Handle_t *DB2, GPIO_Handle_t *DB3, GPIO_Handle_t *DB4, GPIO_Handle_t *DB5, GPIO_Handle_t *DB6, GPIO_Handle_t *DB7,uint8_t mode){
-	// initialization protocol for 8-bit mode
-	if( mode == MODE_8BIT ){
-		// wait at least 15 ms
-		delay(20);
-		/*
-		GPIO_WriteToOutputPin(RS -> pGPIOx, RS ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		GPIO_WriteToOutputPin(RW -> pGPIOx, RW ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		GPIO_WriteToOutputPin(DB0 -> pGPIOx, DB0 ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		GPIO_WriteToOutputPin(DB1 -> pGPIOx, DB1 ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		GPIO_WriteToOutputPin(DB2 -> pGPIOx, DB2 ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		GPIO_WriteToOutputPin(DB3 -> pGPIOx, DB3 ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		*/
-		GPIO_WriteToOutputPin(DB4 -> pGPIOx, DB4 ->GPIO_PinConfig.GPIO_PinNumber, HIGH);
-		GPIO_WriteToOutputPin(DB5 -> pGPIOx, DB5 ->GPIO_PinConfig.GPIO_PinNumber, HIGH);
-		pulseEnablePin(E);
-		// wait at least 4.1 ms
-		delay(5);
-		pulseEnablePin(E);
-		// wait at least 100 us
-		pulseEnablePin(E);
-		// function set
-		GPIO_WriteToOutputPin(DB2 -> pGPIOx, DB2 ->GPIO_PinConfig.GPIO_PinNumber, HIGH);
-		GPIO_WriteToOutputPin(DB3 -> pGPIOx, DB3 ->GPIO_PinConfig.GPIO_PinNumber, HIGH);
-		pulseEnablePin(E);
-		// display off
-		GPIO_WriteToOutputPin(DB4 -> pGPIOx, DB4 ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		GPIO_WriteToOutputPin(DB5 -> pGPIOx, DB5 ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		GPIO_WriteToOutputPin(DB2 -> pGPIOx, DB2 ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		pulseEnablePin(E);
-		// display clear
-		GPIO_WriteToOutputPin(DB3 -> pGPIOx, DB3 ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		GPIO_WriteToOutputPin(DB0 -> pGPIOx, DB0 ->GPIO_PinConfig.GPIO_PinNumber, HIGH);
-		// entry mode set
-		GPIO_WriteToOutputPin(DB2 -> pGPIOx, DB2 ->GPIO_PinConfig.GPIO_PinNumber, HIGH);
-		GPIO_WriteToOutputPin(DB1 -> pGPIOx, DB1 ->GPIO_PinConfig.GPIO_PinNumber, HIGH);
-		GPIO_WriteToOutputPin(DB0 -> pGPIOx, DB0 ->GPIO_PinConfig.GPIO_PinNumber, LOW);
-		pulseEnablePin(E);
-	}
-}
+extern uint16_t humidity;
+extern uint16_t temperature;
 
-int main(void){
+int main(void)
+{
 
-	GPIO_Handle_t RS, RW, E, DB0, DB1, DB2, DB3, DB4, DB5, DB6, DB7;
-	// init RS pin
+	initialise_monitor_handles();
+	//printf("Hello world1\n");
+	//GPIO_Handle_t RS, RW, E, DB0, DB1, DB2, DB3, DB4, DB5, DB6, DB7;
+
+	GPIO_Handle_t dht11_sensor; //use GPIO PD9
+
+	// init dht11 pin (PD9)
+	dht11_sensor.pGPIOx = GPIOD;
+	dht11_sensor.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+	dht11_sensor.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_9;
+	dht11_sensor.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+	dht11_sensor.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+	dht11_sensor.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+	GPIO_Init(&dht11_sensor);
+
+	GPIO_WriteToOutputPin(dht11_sensor.pGPIOx, dht11_sensor.GPIO_PinConfig.GPIO_PinNumber, HIGH);
+	//	delay(10);
+
+	// send start signal
+	GPIO_WriteToOutputPin(dht11_sensor.pGPIOx, dht11_sensor.GPIO_PinConfig.GPIO_PinNumber, LOW);
+	// wait 18 ms
+	delay(18);
+	GPIO_WriteToOutputPin(dht11_sensor.pGPIOx, dht11_sensor.GPIO_PinConfig.GPIO_PinNumber, HIGH);
+	dht11_sensor.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
+	GPIO_Init(&dht11_sensor);
+	// wait 40 ms
+	delay(40);
+	printf("Humidity = %i.%i\nTemp = %i.%i\n", humidity >> 4, humidity & 0x0f, temperature >> 4, temperature & 0x0f);
+
+	printf("Hello world2\n");
+	//dht11_get_data(&dht11_sensor);
+	printf("Hello world3\n");
+	printf("Humidity = %i.%i\nTemp = %i.%i\n", humidity >> 4, humidity & 0x0f, temperature >> 4, temperature & 0x0f);
+
+#if 0
+	// init RS pin (PC1)
 	RS.pGPIOx = GPIOC;
 	RS.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	RS.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_1;
@@ -74,7 +71,7 @@ int main(void){
 	RS.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIO_Init(&RS);
 
-	// init RW pin
+	// init RW pin (PC0)
 	RW.pGPIOx = GPIOC;
 	RW.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	RW.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_0;
@@ -83,7 +80,7 @@ int main(void){
 	RW.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIO_Init(&RW);
 
-	// init E pin
+	// init E pin (PC3)
 	E.pGPIOx = GPIOC;
 	E.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	E.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_3;
@@ -92,7 +89,7 @@ int main(void){
 	E.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIO_Init(&E);
 
-	// init DB0 pin
+	// init D0 pin (PC2)
 	DB0.pGPIOx = GPIOC;
 	DB0.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	DB0.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_2;
@@ -101,7 +98,7 @@ int main(void){
 	DB0.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIO_Init(&DB0);
 
-	// init DB1 pin
+	// init D1 pin (PA1)
 	DB1.pGPIOx = GPIOA;
 	DB1.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	DB1.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_1;
@@ -110,7 +107,7 @@ int main(void){
 	DB1.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIO_Init(&DB1);
 
-	// init DB2 pin
+	// init D2 pin (PA3)
 	DB2.pGPIOx = GPIOA;
 	DB2.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	DB2.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_3;
@@ -119,7 +116,7 @@ int main(void){
 	DB2.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIO_Init(&DB2);
 
-	// init DB3 pin
+	// init D3 pin (PA2)
 	DB3.pGPIOx = GPIOA;
 	DB3.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	DB3.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_2;
@@ -128,7 +125,7 @@ int main(void){
 	DB3.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIO_Init(&DB3);
 
-	// init DB4 pin
+	// init D4 pin (PA7)
 	DB4.pGPIOx = GPIOA;
 	DB4.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	DB4.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_7;
@@ -137,7 +134,7 @@ int main(void){
 	DB4.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIO_Init(&DB4);
 
-	// init DB5 pin
+	// init D5 pin (PA6)
 	DB5.pGPIOx = GPIOA;
 	DB5.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	DB5.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_6;
@@ -146,7 +143,7 @@ int main(void){
 	DB5.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIO_Init(&DB5);
 
-	// init DB6 pin
+	// init D6 pin (PC5)
 	DB6.pGPIOx = GPIOC;
 	DB6.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	DB6.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_5;
@@ -155,7 +152,7 @@ int main(void){
 	DB6.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIO_Init(&DB6);
 
-	// init DB7 pin
+	// init D7 pin (PC4)
 	DB7.pGPIOx = GPIOC;
 	DB7.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
 	DB7.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_4;
@@ -175,8 +172,57 @@ int main(void){
 	GPIO_WriteToOutputPin(DB5.pGPIOx, DB5.GPIO_PinConfig.GPIO_PinNumber, LOW);
 	GPIO_WriteToOutputPin(DB6.pGPIOx, DB6.GPIO_PinConfig.GPIO_PinNumber, LOW);
 	GPIO_WriteToOutputPin(DB7.pGPIOx, DB7.GPIO_PinConfig.GPIO_PinNumber, LOW);
-
+	double fnum = 14.0;
+	char buff[50] = {0};
+	sprintf(buff,"%f",fnum);
+	//printf("Float val: %f\n", fnum);
+	printf("test and %s", buff);
+	//delay(50);
 	//uint8_t LCD_init( uint8_t mode);
+	lcd_clear_display(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7);
+	lcd_return_home(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7);
+	lcd_function_set(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, (uint8_t)'A');
+
+
+
+	//lcd_write_character_to_lcd(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, (uint8_t)'A');
+	uint8_t buffer[] = "Hello World\n";
+	uint16_t data_siz = sizeof(buffer)/sizeof(uint8_t);
+	//lcd_write_string_to_lcd( &RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7,  (uint8_t *)"Hello World\n", 12);
+
+
+	//lcd_display_status_set(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, 1);
+	//lcd_display_status_set(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, 1);
+	//delay(1000);
+	//for(uint8_t count = 0; count < 32; count++)
+	//{
+	//	lcd_write_character_to_lcd(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, (uint8_t)'A');
+	//}
+	//lcd_return_home(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7);
+
+#endif
+
+	while(1)
+	{
+		//lcd_write_character_to_lcd(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, (uint8_t)'A');
+#if 0
+		lcd_set_cgram_address(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, 0x00);
+		lcd_write_character_to_lcd(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, (uint8_t)'L');
+		delay(1000);
+		lcd_set_cgram_address(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, 0x0F);
+		lcd_write_character_to_lcd(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, (uint8_t)'R');
+		delay(1000);
+		lcd_set_cgram_address(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, 0x3F);
+		lcd_write_character_to_lcd(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, (uint8_t)'L');
+		delay(1000);
+		lcd_set_cgram_address(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, 0x4F);
+		lcd_write_character_to_lcd(&RS, &RW, &E, &DB0, &DB1, &DB2, &DB3, &DB4, &DB5, &DB6, &DB7, (uint8_t)'R');
+#endif
+		//delay(10);
+		;
+	}
 
 	return 0;
 }
+
+

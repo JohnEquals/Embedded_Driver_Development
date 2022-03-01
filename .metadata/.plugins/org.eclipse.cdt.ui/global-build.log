@@ -1,0 +1,24 @@
+02:08:20 **** Incremental Build of configuration Debug for project stm32f407xx_drivers ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/LCD_TestApplication.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -DDEBUG -c -I../Inc -I"E:/Users/class/Documents/Embedded_Driver_Development/Project1/stm32f407xx_drivers/external_device_drivers/public" -I"E:/Users/class/Documents/Embedded_Driver_Development/Project1/stm32f407xx_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/LCD_TestApplication.d" -MT"Src/LCD_TestApplication.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/LCD_TestApplication.o"
+arm-none-eabi-gcc -o "stm32f407xx_drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\Users\class\Documents\Embedded_Driver_Development\Project1\stm32f407xx_drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407xx_drivers.map" -Wl,--gc-sections -static -specs=rdimon.specs -lc -lrdimon -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32f407xx_drivers.elf
+ 
+arm-none-eabi-size   stm32f407xx_drivers.elf 
+arm-none-eabi-objdump -h -S  stm32f407xx_drivers.elf  > "stm32f407xx_drivers.list"
+arm-none-eabi-objcopy  -O binary  stm32f407xx_drivers.elf  "stm32f407xx_drivers.bin"
+   text	   data	    bss	    dec	    hex	filename
+  18248	    484	   1772	  20504	   5018	stm32f407xx_drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32f407xx_drivers.bin
+ 
+Finished building: stm32f407xx_drivers.list
+ 
+02:08:25 **** Incremental Build of configuration Debug for project stm32f407xx_drivers ****
+make -j12 all 
+arm-none-eabi-size   stm32f407xx_drivers.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18248	    484	   1772	  20504	   5018	stm32f407xx_drivers.elf
+Finished building: default.size.stdout
+ 

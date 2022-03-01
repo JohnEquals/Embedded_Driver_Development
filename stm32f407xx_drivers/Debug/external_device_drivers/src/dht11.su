@@ -1,0 +1,2 @@
+dht11.c:20:13:delay	24	static
+dht11.c:31:6:dht11_get_data	24	static

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;stm32f407xx_drivers/Src/SPI_CmdHandling_Arduino&apos; to &apos;SPI_CmdHandling_Arduino.c&apos;" description="Rename resource &apos;SPI_CmdHandling_Arduino&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/SPI_CmdHandling_Arduino" name="SPI_CmdHandling_Arduino.c" stamp="1614403790242" updateReferences="true"/>
+</session>

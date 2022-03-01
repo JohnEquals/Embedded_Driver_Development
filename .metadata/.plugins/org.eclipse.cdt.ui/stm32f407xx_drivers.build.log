@@ -1,0 +1,13 @@
+14:14:43 **** Build of configuration Debug for project stm32f407xx_drivers ****
+make -j8 all 
+arm-none-eabi-gcc "../drivers/Src/stm32f407xx_gpio_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -DDEBUG -c -I../Inc -I"C:/Users/class/OneDrive/Desktop/Embedded_Driver_Development/Project1/stm32f407xx_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"drivers/Src/stm32f407xx_gpio_driver.d" -MT"drivers/Src/stm32f407xx_gpio_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f407xx_gpio_driver.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Startup/startup_stm32f407vgtx.o" "../Startup/startup_stm32f407vgtx.s"
+arm-none-eabi-gcc -o "stm32f407xx_drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\class\OneDrive\Desktop\Embedded_Driver_Development\Project1\stm32f407xx_drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407xx_drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Startup/startup_stm32f407vgtx.o: In function `LoopFillZerobss':
+C:/Users/class/OneDrive/Desktop/Embedded_Driver_Development/Project1/stm32f407xx_drivers/Debug/../Startup/startup_stm32f407vgtx.s:94: undefined reference to `main'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:44: stm32f407xx_drivers.elf] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+
+14:14:44 Build Failed. 2 errors, 0 warnings. (took 1s.320ms)
+

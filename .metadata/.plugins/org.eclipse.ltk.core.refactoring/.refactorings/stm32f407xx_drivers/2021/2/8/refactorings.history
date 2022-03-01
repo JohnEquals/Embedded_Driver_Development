@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;stm32f407xx_drivers/Src/LCD_TestApplication&apos; to &apos;LCD_TestApplication.c&apos;" description="Rename resource &apos;LCD_TestApplication&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/LCD_TestApplication" name="LCD_TestApplication.c" stamp="1613804618685" updateReferences="true"/>
+</session>

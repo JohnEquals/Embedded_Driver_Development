@@ -1,0 +1,12 @@
+stm32f407xx_i2c_driver.c:17:13:I2C_GenerateStartCondition	16	static
+stm32f407xx_i2c_driver.c:21:13:I2C_ExecuteAddressPhase	16	static
+stm32f407xx_i2c_driver.c:27:13:I2C_ClearAddressFlag	24	static
+stm32f407xx_i2c_driver.c:36:6:I2C_PeripheralClkCtrl	16	static
+stm32f407xx_i2c_driver.c:54:10:RCC_GetPLLOutputClk	4	static
+stm32f407xx_i2c_driver.c:58:10:RCC_GetPCLK1Value	24	static
+stm32f407xx_i2c_driver.c:88:6:I2C_Init	32	static
+stm32f407xx_i2c_driver.c:146:6:I2C_DeInit	16	static
+stm32f407xx_i2c_driver.c:156:9:I2C_GetFlagStatusSR1	16	static
+stm32f407xx_i2c_driver.c:165:6:I2C_MasterSendData	24	static
+stm32f407xx_i2c_driver.c:193:6:I2C_IRQInterruptConfig	16	static
+stm32f407xx_i2c_driver.c:248:6:I2C_IRQPriorityConfig	24	static

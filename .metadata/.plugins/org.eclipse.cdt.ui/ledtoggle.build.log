@@ -1,0 +1,10 @@
+15:39:10 **** Incremental Build of configuration Debug for project ledtoggle ****
+make -j8 all 
+arm-none-eabi-size   ledtoggle.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6324	     20	   1572	   7916	   1eec	ledtoggle.elf
+Finished building: default.size.stdout
+ 
+
+15:39:12 Build Finished. 0 errors, 0 warnings. (took 1s.366ms)
+
