@@ -304,8 +304,8 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0xc4 ./drivers/Src/stm32f407xx_i2c_driver.o
  .debug_macro   0x0000000000000000       0xb8 ./drivers/Src/stm32f407xx_i2c_driver.o
  .debug_macro   0x0000000000000000       0x7c ./drivers/Src/stm32f407xx_i2c_driver.o
- .debug_line    0x0000000000000000      0x800 ./drivers/Src/stm32f407xx_i2c_driver.o
- .debug_str     0x0000000000000000     0x6afe ./drivers/Src/stm32f407xx_i2c_driver.o
+ .debug_line    0x0000000000000000      0x7e6 ./drivers/Src/stm32f407xx_i2c_driver.o
+ .debug_str     0x0000000000000000     0x6ae4 ./drivers/Src/stm32f407xx_i2c_driver.o
  .comment       0x0000000000000000       0x54 ./drivers/Src/stm32f407xx_i2c_driver.o
  .debug_frame   0x0000000000000000      0x1dc ./drivers/Src/stm32f407xx_i2c_driver.o
  .ARM.attributes
@@ -385,8 +385,8 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0xc4 ./drivers/Src/stm32f407xx_spi_driver.o
  .debug_macro   0x0000000000000000       0x82 ./drivers/Src/stm32f407xx_spi_driver.o
  .debug_macro   0x0000000000000000       0xb2 ./drivers/Src/stm32f407xx_spi_driver.o
- .debug_line    0x0000000000000000      0xa22 ./drivers/Src/stm32f407xx_spi_driver.o
- .debug_str     0x0000000000000000     0x6bc4 ./drivers/Src/stm32f407xx_spi_driver.o
+ .debug_line    0x0000000000000000      0xa08 ./drivers/Src/stm32f407xx_spi_driver.o
+ .debug_str     0x0000000000000000     0x6baa ./drivers/Src/stm32f407xx_spi_driver.o
  .comment       0x0000000000000000       0x54 ./drivers/Src/stm32f407xx_spi_driver.o
  .debug_frame   0x0000000000000000      0x33c ./drivers/Src/stm32f407xx_spi_driver.o
  .ARM.attributes
@@ -449,8 +449,8 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0xc4 ./external_device_drivers/src/1602a_lcd.o
  .debug_macro   0x0000000000000000       0xb8 ./external_device_drivers/src/1602a_lcd.o
  .debug_macro   0x0000000000000000       0x82 ./external_device_drivers/src/1602a_lcd.o
- .debug_line    0x0000000000000000      0x72f ./external_device_drivers/src/1602a_lcd.o
- .debug_str     0x0000000000000000     0x69e3 ./external_device_drivers/src/1602a_lcd.o
+ .debug_line    0x0000000000000000      0x6fb ./external_device_drivers/src/1602a_lcd.o
+ .debug_str     0x0000000000000000     0x69c9 ./external_device_drivers/src/1602a_lcd.o
  .comment       0x0000000000000000       0x54 ./external_device_drivers/src/1602a_lcd.o
  .debug_frame   0x0000000000000000      0x1a4 ./external_device_drivers/src/1602a_lcd.o
  .ARM.attributes
@@ -1703,21 +1703,20 @@ LOAD e:/users/john/stm32cubeide_1.8.0/stm32cubeide/plugins/com.st.stm32cube.ide.
  .debug_macro   0x000000000000279c       0xc2 ./external_device_drivers/src/dht11.o
  .debug_macro   0x000000000000285e       0x22 ./external_device_drivers/src/dht11.o
 
-.debug_line     0x0000000000000000     0x1719
- .debug_line    0x0000000000000000      0x751 ./Src/LCD_TestApplication.o
- .debug_line    0x0000000000000751       0x84 ./Startup/startup_stm32f407vgtx.o
- .debug_line    0x00000000000007d5      0x999 ./drivers/Src/stm32f407xx_gpio_driver.o
- .debug_line    0x000000000000116e      0x5ab ./external_device_drivers/src/dht11.o
+.debug_line     0x0000000000000000     0x1697
+ .debug_line    0x0000000000000000      0x71d ./Src/LCD_TestApplication.o
+ .debug_line    0x000000000000071d       0x84 ./Startup/startup_stm32f407vgtx.o
+ .debug_line    0x00000000000007a1      0x97f ./drivers/Src/stm32f407xx_gpio_driver.o
+ .debug_line    0x0000000000001120      0x577 ./external_device_drivers/src/dht11.o
 
-.debug_str      0x0000000000000000     0xaae3
- .debug_str     0x0000000000000000     0xa737 ./Src/LCD_TestApplication.o
-                                       0xa9c8 (size before relaxing)
- .debug_str     0x000000000000a737       0x31 ./Startup/startup_stm32f407vgtx.o
-                                         0x89 (size before relaxing)
- .debug_str     0x000000000000a768      0x2cb ./drivers/Src/stm32f407xx_gpio_driver.o
-                                       0x6b2b (size before relaxing)
- .debug_str     0x000000000000aa33       0xb0 ./external_device_drivers/src/dht11.o
-                                       0x6932 (size before relaxing)
+.debug_str      0x0000000000000000     0xab21
+ .debug_str     0x0000000000000000     0xa71d ./Src/LCD_TestApplication.o
+                                       0xa9ae (size before relaxing)
+ .debug_str     0x000000000000a71d       0x89 ./Startup/startup_stm32f407vgtx.o
+ .debug_str     0x000000000000a7a6      0x2cb ./drivers/Src/stm32f407xx_gpio_driver.o
+                                       0x6b11 (size before relaxing)
+ .debug_str     0x000000000000aa71       0xb0 ./external_device_drivers/src/dht11.o
+                                       0x6918 (size before relaxing)
 
 .comment        0x0000000000000000       0x53
  .comment       0x0000000000000000       0x53 ./Src/LCD_TestApplication.o

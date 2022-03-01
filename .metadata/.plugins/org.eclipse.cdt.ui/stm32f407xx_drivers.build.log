@@ -1,13 +1,25 @@
-14:14:43 **** Build of configuration Debug for project stm32f407xx_drivers ****
-make -j8 all 
-arm-none-eabi-gcc "../drivers/Src/stm32f407xx_gpio_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -DDEBUG -c -I../Inc -I"C:/Users/class/OneDrive/Desktop/Embedded_Driver_Development/Project1/stm32f407xx_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"drivers/Src/stm32f407xx_gpio_driver.d" -MT"drivers/Src/stm32f407xx_gpio_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f407xx_gpio_driver.o"
-arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Startup/startup_stm32f407vgtx.o" "../Startup/startup_stm32f407vgtx.s"
-arm-none-eabi-gcc -o "stm32f407xx_drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\class\OneDrive\Desktop\Embedded_Driver_Development\Project1\stm32f407xx_drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407xx_drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Startup/startup_stm32f407vgtx.o: In function `LoopFillZerobss':
-C:/Users/class/OneDrive/Desktop/Embedded_Driver_Development/Project1/stm32f407xx_drivers/Debug/../Startup/startup_stm32f407vgtx.s:94: undefined reference to `main'
-collect2.exe: error: ld returned 1 exit status
-make: *** [makefile:44: stm32f407xx_drivers.elf] Error 1
-"make -j8 all" terminated with exit code 2. Build might be incomplete.
+02:27:09 **** Build of configuration Debug for project stm32f407xx_drivers ****
+make -j12 all 
+arm-none-eabi-gcc "../external_device_drivers/src/1602a_lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -DDEBUG -c -I../Inc -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/external_device_drivers/public" -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"external_device_drivers/src/1602a_lcd.d" -MT"external_device_drivers/src/1602a_lcd.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "external_device_drivers/src/1602a_lcd.o"
+arm-none-eabi-gcc "../external_device_drivers/src/dht11.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -DDEBUG -c -I../Inc -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/external_device_drivers/public" -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"external_device_drivers/src/dht11.d" -MT"external_device_drivers/src/dht11.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "external_device_drivers/src/dht11.o"
+arm-none-eabi-gcc "../drivers/Src/stm32f407xx_gpio_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -DDEBUG -c -I../Inc -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/external_device_drivers/public" -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"drivers/Src/stm32f407xx_gpio_driver.d" -MT"drivers/Src/stm32f407xx_gpio_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f407xx_gpio_driver.o"
+arm-none-eabi-gcc "../drivers/Src/stm32f407xx_i2c_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -DDEBUG -c -I../Inc -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/external_device_drivers/public" -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"drivers/Src/stm32f407xx_i2c_driver.d" -MT"drivers/Src/stm32f407xx_i2c_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f407xx_i2c_driver.o"
+arm-none-eabi-gcc "../drivers/Src/stm32f407xx_spi_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -DDEBUG -c -I../Inc -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/external_device_drivers/public" -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"drivers/Src/stm32f407xx_spi_driver.d" -MT"drivers/Src/stm32f407xx_spi_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f407xx_spi_driver.o"
+arm-none-eabi-gcc "../Src/LCD_TestApplication.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -DDEBUG -c -I../Inc -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/external_device_drivers/public" -I"E:/Users/class/Documents/repo/blank/stm32f407xx_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/LCD_TestApplication.d" -MT"Src/LCD_TestApplication.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/LCD_TestApplication.o"
+arm-none-eabi-gcc -o "stm32f407xx_drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\Users\class\Documents\repo\blank\stm32f407xx_drivers\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f407xx_drivers.map" -Wl,--gc-sections -static -specs=rdimon.specs -lc -lrdimon -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32f407xx_drivers.elf
+ 
+arm-none-eabi-size   stm32f407xx_drivers.elf 
+arm-none-eabi-objdump -h -S  stm32f407xx_drivers.elf  > "stm32f407xx_drivers.list"
+arm-none-eabi-objcopy  -O binary  stm32f407xx_drivers.elf  "stm32f407xx_drivers.bin"
+   text	   data	    bss	    dec	    hex	filename
+  18248	    484	   1772	  20504	   5018	stm32f407xx_drivers.elf
+Finished building: stm32f407xx_drivers.bin
+Finished building: default.size.stdout
+ 
+ 
+Finished building: stm32f407xx_drivers.list
+ 
 
-14:14:44 Build Failed. 2 errors, 0 warnings. (took 1s.320ms)
+02:27:10 Build Finished. 0 errors, 0 warnings. (took 476ms)
 
